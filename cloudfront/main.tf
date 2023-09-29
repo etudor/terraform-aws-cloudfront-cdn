@@ -105,3 +105,7 @@ variable "origin_domain_name" {
 output "cloudfront_arn" {
   value = aws_cloudfront_distribution.cf_dist.arn
 }
+
+output "cloudfront_dist" {
+  value = aws_cloudfront_distribution.cf_dist
+}
