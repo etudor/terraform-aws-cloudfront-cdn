@@ -6,6 +6,29 @@ resource "aws_s3_bucket" "s3_bucket" {
   }
 }
 
+resource "aws_s3_bucket_cors_configuration" "public_bucket_cors" {
+  bucket = aws_s3_bucket.s3_bucket.id
+
+  cors_rule {
+    allowed_headers = ["*"]
+    allowed_methods = ["PUT", "POST", "DELETE"]
+    allowed_origins = [
+      "http://localhost",
+      "https://*admin-dashboard-epic-stg.netlify.app",
+      "https://*ee-dashboard-epic-stg.netlify.app",
+      "https://*ea-dashboard-epic-stg.netlify.app",
+      "https://*eam-dashboard-epic-stg.netlify.app"
+    ]
+    expose_headers  = []
+    max_age_seconds = 3000
+  }
+
+  cors_rule {
+    allowed_methods = ["GET"]
+    allowed_origins = ["*"]
+  }
+}
+
 resource "aws_s3_bucket_ownership_controls" "s3-acl-ownership" {
   bucket = aws_s3_bucket.s3_bucket.id
   rule {
