@@ -12,13 +12,7 @@ resource "aws_s3_bucket_cors_configuration" "public_bucket_cors" {
   cors_rule {
     allowed_headers = ["*"]
     allowed_methods = ["PUT", "POST", "DELETE"]
-    allowed_origins = [
-      "http://localhost",
-      "https://*admin-dashboard-epic-stg.netlify.app",
-      "https://*ee-dashboard-epic-stg.netlify.app",
-      "https://*ea-dashboard-epic-stg.netlify.app",
-      "https://*eam-dashboard-epic-stg.netlify.app"
-    ]
+    allowed_origins = var.allowed_origins
     expose_headers  = []
     max_age_seconds = 3000
   }
@@ -60,4 +54,9 @@ output "bucket_arn" {
 variable "bucket_name" {
   description = "bucket name"
   type = string
+}
+
+variable "allowed_origins" {
+  description = "bucket allowed origins"
+  type = list(string)
 }
