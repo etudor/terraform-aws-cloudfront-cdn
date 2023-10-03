@@ -1,6 +1,7 @@
 module "public_buckets" {
   source      = "./object"
   bucket_name = var.bucket_name
+  allowed_origins = var.allowed_origins
 }
 
 module "cloud_front" {

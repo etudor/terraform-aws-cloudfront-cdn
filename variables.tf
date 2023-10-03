@@ -11,3 +11,8 @@ variable "domain_name" {
 variable "certificate_arn" {
   description = "CF Certificate ARN"
 }
+
+variable "allowed_origins" {
+  description = "bucket allowed origins"
+  type = list(string)
+}
