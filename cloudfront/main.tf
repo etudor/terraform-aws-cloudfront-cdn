@@ -18,7 +18,6 @@ resource "aws_cloudfront_distribution" "cf_dist" {
     origin_access_control_id = aws_cloudfront_origin_access_control.cloudfront_s3_oac.id
   }
 
-  response_headers_policy_id = data.aws_cloudfront_response_headers_policy.res_policy.id
   enabled = true
   default_cache_behavior {
     allowed_methods  = ["GET", "HEAD"]
@@ -32,7 +31,8 @@ resource "aws_cloudfront_distribution" "cf_dist" {
         forward = "none"
       }
     }
-
+  
+    response_headers_policy_id = data.aws_cloudfront_response_headers_policy.res_policy.id
     viewer_protocol_policy = "allow-all"
     min_ttl                = 0
     default_ttl            = 3600
