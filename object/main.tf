@@ -8,7 +8,7 @@ resource "aws_s3_bucket" "s3_bucket" {
 
 resource "aws_s3_bucket_cors_configuration" "public_bucket_cors" {
   bucket = aws_s3_bucket.s3_bucket.id
-
+  
   cors_rule {
     allowed_headers = ["*"]
     allowed_methods = ["PUT", "POST", "DELETE"]

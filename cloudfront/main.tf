@@ -7,6 +7,10 @@ resource "aws_cloudfront_origin_access_control" "cloudfront_s3_oac" {
   signing_protocol                  = "sigv4"
 }
 
+data "aws_cloudfront_response_headers_policy" "res_policy" {
+  name = "my-header"
+}
+
 resource "aws_cloudfront_distribution" "cf_dist" {
   origin {
     domain_name = var.origin_domain_name
@@ -14,6 +18,7 @@ resource "aws_cloudfront_distribution" "cf_dist" {
     origin_access_control_id = aws_cloudfront_origin_access_control.cloudfront_s3_oac.id
   }
 
+  response_headers_policy_id = data.aws_cloudfront_response_headers_policy.res_policy.id
   enabled = true
   default_cache_behavior {
     allowed_methods  = ["GET", "HEAD"]
